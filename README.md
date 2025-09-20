@@ -1,4 +1,4 @@
-# Galaxy Navigation (Compose Multiplatform) — Type‑Safe Navigation Example
+# Galaxy Navigation (Compose Multiplatform) — Type‑Safe Navigation with Deeplinks Example
 
 [![Kotlin](https://img.shields.io/badge/kotlin-2.2.10-7F52FF.svg?logo=kotlin)](http://kotlinlang.org)
 ![Compose Multiplatform](https://img.shields.io/badge/Compose%20Multiplatform-1.9.0-blue)

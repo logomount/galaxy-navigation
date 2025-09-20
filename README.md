@@ -332,5 +332,8 @@ To add a new top‑level graph:
 ## UI
 UI design is done with Google Stitch: https://stitch.withgoogle.com/
 
+## Fonts
+Space Grotesk from Google Fonts: https://fonts.google.com/specimen/Space+Grotesk
+
 ## Icons
 Icons are from Reshot Space Line Icon Set: https://www.reshot.com/free-svg-icons/item/space-line-icon-set-7YDXQBCTRH/

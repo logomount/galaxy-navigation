@@ -24,10 +24,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.dropUnlessResumed
-import androidx.lifecycle.coroutineScope
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavUri
@@ -38,7 +36,6 @@ import com.codescape.galaxynavigation.navigation.AppNavigation
 import com.codescape.kepler22.navigation.Kepler22Graph
 import com.codescape.solar.navigation.SolarGraph
 import com.codescape.theme.GalaxyNavigationTheme
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -52,9 +49,9 @@ import theme.Res as ThemeRes
 fun App() {
     GalaxyNavigationTheme {
         val navController = rememberNavController()
-        val currentDestination by navController.currentBackStackEntryAsState()
-        val hasBackButton = remember(currentDestination) {
-            currentDestination?.run {
+        val backStackEntry by navController.currentBackStackEntryAsState()
+        val hasBackButton = remember(backStackEntry) {
+            backStackEntry?.run {
                 when {
                     destination.hasRoute<SolarGraph.SolarSystemScreen>() -> false
                     destination.hasRoute<Kepler22Graph.Kepler22SystemScreen>() -> false
@@ -62,8 +59,8 @@ fun App() {
                 }
             } ?: false
         }
-        val toolbarTitle = remember(currentDestination) {
-            currentDestination?.run {
+        val toolbarTitle = remember(backStackEntry) {
+            backStackEntry?.run {
                 when {
                     destination.hasRoute<SolarGraph.SolarSystemScreen>() -> "Solar System"
                     destination.hasRoute<SolarGraph.EarthScreen>() ->
@@ -77,8 +74,8 @@ fun App() {
                 }
             }.orEmpty()
         }
-        val bottomNavItem = remember(currentDestination) {
-            currentDestination?.destination?.run {
+        val bottomNavItem = remember(backStackEntry) {
+            backStackEntry?.destination?.run {
                 when {
                     hierarchy.any { it.hasRoute<SolarGraph.ROUTE>() } -> BottomNavItem.SolarSystem
                     hierarchy.any { it.hasRoute<Kepler22Graph.ROUTE>() } -> BottomNavItem.Kepler22System
@@ -145,7 +142,11 @@ fun App() {
                         try {
                             navController.navigate(NavUri(uri))
                         } catch (e: Exception) {
-                            // Show Snackbar
+                            snackHostState.showSnackbar(
+                                message = "Invalid deep link: $uri",
+                                duration = SnackbarDuration.Short,
+                                withDismissAction = true
+                            )
                         }
                     }
                 }

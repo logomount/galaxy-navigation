@@ -48,7 +48,7 @@ object SolarGraph {
     @Serializable data object MarsScreen
 }
 
-fun NavGraphBuilder.sunGraph(
+fun NavGraphBuilder.solarGraph(
     navController: NavController,
     onSelectKepler22System: () -> Unit
 ) {
@@ -111,7 +111,7 @@ fun AppNavigation(modifier: Modifier = Modifier, navController: NavHostControlle
         startDestination = SolarGraph.ROUTE,
         contentAlignment = Alignment.Center
     ) {
-        sunGraph(
+        solarGraph(
             navController = navController,
             onSelectKepler22System = { navController.navigate(Kepler22Graph.ROUTE) }
         )

@@ -29,7 +29,7 @@ object SolarGraph {
     data object MarsScreen
 }
 
-fun NavGraphBuilder.sunGraph(
+fun NavGraphBuilder.solarGraph(
     navController: NavController,
     onSelectKepler22System: () -> Unit
 ) {

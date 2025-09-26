@@ -8,7 +8,7 @@ import androidx.navigation.compose.NavHost
 import com.codescape.kepler22.navigation.Kepler22Graph
 import com.codescape.kepler22.navigation.kepler22Graph
 import com.codescape.solar.navigation.SolarGraph
-import com.codescape.solar.navigation.sunGraph
+import com.codescape.solar.navigation.solarGraph
 
 @Composable
 fun AppNavigation(
@@ -21,7 +21,7 @@ fun AppNavigation(
         startDestination = SolarGraph.ROUTE,
         contentAlignment = Alignment.Center
     ) {
-        sunGraph(
+        solarGraph(
             navController = navController,
             onSelectKepler22System = {
                 navController.navigate(Kepler22Graph.ROUTE)
